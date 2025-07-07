@@ -1,15 +1,15 @@
-import { functionValidation } from '$lib/server/funcaoValidacao';
+import { funcaoValidacao } from '$lib/server/funcaoValidacao';
 import { prismaClient } from '$lib/server/prismaClient';
 import type { Action } from './$types';
 import { schema } from './schema.server';
 
 export const actionCriar: Action = async function ({ request }) {
-	const validation = await functionValidation({
+	const validation = await funcaoValidacao({
 		request,
 		schema,
 	});
 
-	if (validation.success === false) {
+	if (validation.valid === false) {
 		return validation.fail;
 	}
 
